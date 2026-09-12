@@ -1,1 +1,10 @@
+### IDE ###
 .vscode/
+
+### Symbolic Links ###
+/corpora/
+
+### Python ###
+.venv/
+__pycache__/
+.pytest_cache/
