@@ -1,8 +1,12 @@
 ### IDE ###
-.vscode/
+.vscode/*
+!.vscode/settings.json
 
 ### Symbolic Links ###
 /corpora/
+
+### SQL Database ###
+/data/
 
 ### Python ###
 .venv/

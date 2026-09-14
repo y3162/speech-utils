@@ -1,0 +1,16 @@
+{
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "workbench.iconTheme": "catppuccin-frappe",
+    "editor.cursorBlinking": "expand",
+    "workbench.editorAssociations": {
+        "0": {
+            "viewType": "agents.markdownEditor",
+            "filenamePattern": "*.md"
+        },
+        "*.csv": "default",
+        "*.parquet": "parquet-visualizer.parquetVisualizer",
+        "*.duckdb": "duckdb.dataFileViewer",
+        "*.tsv": "duckdb.dataFileViewer",
+        "*.xlsx": "duckdb.dataFileViewer"
+    }
+}
