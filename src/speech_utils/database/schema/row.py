@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any
+from typing import Any, Sequence, TypeVar
 
 from .column import Column
+
+RowT = TypeVar("RowT", bound="Row")
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -18,3 +20,15 @@ class Row:
 
     def insert_params(self, columns: tuple[Column, ...]) -> tuple[Any, ...]:
         return tuple(self.value_for(column) for column in columns)
+
+    @classmethod
+    def from_sql(
+        cls: type[RowT],
+        columns: tuple[Column, ...],
+        values: Sequence[Any],
+    ) -> RowT:
+        kwargs = {
+            column.name: column.from_sql_value(value)
+            for column, value in zip(columns, values, strict=True)
+        }
+        return cls(**kwargs)

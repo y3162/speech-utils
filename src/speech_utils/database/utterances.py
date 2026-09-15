@@ -1,4 +1,4 @@
-from .corpora.dto import UTTERANCE_TABLE
+from .corpora.dto import UTTERANCES_TABLE
 from .common import (
     create_database,
     create_table,
@@ -12,5 +12,5 @@ def create_utterances_table() -> None:
     create_database(SPEECH_UTILS_DB_METADATA_PATH)
     create_table(
         SPEECH_UTILS_DB_METADATA_PATH,
-        UTTERANCE_TABLE,
+        UTTERANCES_TABLE,
     )

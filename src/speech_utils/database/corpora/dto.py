@@ -9,7 +9,7 @@ from ..schema import (
 )
 
 
-UTTERANCE_TABLE = Table(
+UTTERANCES_TABLE = Table(
     name="utterances",
     columns=(
         Column(name="id", type=int, auto_increment=True, primary=True),

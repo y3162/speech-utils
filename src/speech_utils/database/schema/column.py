@@ -91,6 +91,13 @@ class Column:
             return str(value)
         return value
 
+    def from_sql_value(self, value: Any) -> Any:
+        if value is None:
+            return None
+        if self.type is Path:
+            return value if isinstance(value, Path) else Path(value)
+        return value
+
     def foreign_key_constraint(self) -> str | None:
         if self.foreign_key is None:
             return None

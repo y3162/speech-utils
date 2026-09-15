@@ -2,10 +2,9 @@ import csv
 import os
 import tempfile
 from pathlib import Path
-
 import duckdb
 
-from .schema import Row, Table
+from .schema import Query, Row, Table
 
 
 class Connection:
@@ -26,6 +25,12 @@ class Connection:
         if table.name not in self._pending:
             self._pending[table.name] = (table, [])
         self._pending[table.name][1].extend(rows)
+
+    def fetch(self, query: Query, row_type: type[Row]) -> list[Row]:
+        sql, params = query.build()
+        result = self._conn.execute(sql, params).fetchall()
+        columns = query.row_columns
+        return [row_type.from_sql(columns, row) for row in result]
 
     def commit(self) -> None:
         for table, rows in self._pending.values():
