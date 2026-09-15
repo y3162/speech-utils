@@ -70,7 +70,6 @@ def parse_environment_dir(
                     corpus="DEMAND",
                     subset=subset_name,
                     chapter_id=None,
-                    section_id=None,
                     utterance_id=audio_path.stem,
                     speaker_id=None,
                     audio_path=audio_path,

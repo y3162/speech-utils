@@ -121,7 +121,6 @@ def parse_transcript_file(
                     corpus="LibriTTS",
                     subset=subset_name,
                     chapter_id=chapter_id,
-                    section_id=None,
                     utterance_id=utterance_id,
                     speaker_id=speaker_id,
                     audio_path=audio_path,

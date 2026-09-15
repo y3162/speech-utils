@@ -17,7 +17,6 @@ UTTERANCE_TABLE = Table(
         Column(name="subset", type=str, nullable=True),
         Column(name="speaker_id", type=str, nullable=True),
         Column(name="chapter_id", type=str, nullable=True),
-        Column(name="section_id", type=str, nullable=True),
         Column(name="utterance_id", type=str, nullable=True),
         Column(name="audio_path", type=Path, nullable=False, unique=True),
         Column(name="sample_rate", type=int, nullable=True),

@@ -83,7 +83,6 @@ def parse_speaker_dir(
                     corpus="VCTK",
                     subset=None,
                     chapter_id=None,
-                    section_id=None,
                     utterance_id=utterance_id,
                     speaker_id=speaker_id,
                     audio_path=audio_path,
