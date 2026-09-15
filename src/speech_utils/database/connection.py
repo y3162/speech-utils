@@ -40,7 +40,7 @@ class Connection:
         os.close(fd)
         try:
             with open(csv_path, "w", newline="") as csv_file:
-                writer = csv.writer(csv_file)
+                writer = csv.writer(csv_file, lineterminator="\n")
                 writer.writerow(names)
                 for row in rows:
                     writer.writerow(
@@ -50,7 +50,8 @@ class Connection:
             column_list = ", ".join(names)
             escaped_path = csv_path.replace("'", "''")
             self._conn.execute(
-                f"COPY {table.name} ({column_list}) FROM '{escaped_path}' (HEADER TRUE, NULL '')"
+                f"COPY {table.name} ({column_list}) FROM '{escaped_path}' "
+                "(HEADER TRUE, DELIMITER ',', QUOTE '\"', ESCAPE '\"', NULL '')"
             )
         finally:
             os.unlink(csv_path)
