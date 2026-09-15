@@ -36,27 +36,6 @@ class Column:
 
     default: Any = None
 
-    def __post_init__(self) -> None:
-        self.validate()
-
-    def validate(self) -> None:
-        if not self.name:
-            raise ValueError("Column name must not be empty")
-        if self.type not in TYPE_MAP:
-            raise ValueError(f"Unsupported type for column {self.name}: {self.type}")
-        if self.auto_increment and self.type is not int:
-            raise ValueError(f"auto_increment requires int: {self.name}")
-        if self.auto_increment and self.default is not None:
-            raise ValueError(
-                f"auto_increment cannot be combined with default: {self.name}"
-            )
-        if self.primary and self.nullable:
-            raise ValueError(f"Primary key cannot be nullable: {self.name}")
-        if self.foreign_key is not None and (
-            not self.foreign_key[0] or not self.foreign_key[1]
-        ):
-            raise ValueError(f"Invalid foreign_key for {self.name}: {self.foreign_key}")
-
     @property
     def sql_type(self) -> str:
         return TYPE_MAP[self.type]
@@ -125,18 +104,6 @@ class Column:
             for group_id in column.unique_groups:
                 groups[group_id].append(column.name)
         return dict(groups)
-
-    @classmethod
-    def validate_unique_groups(
-        cls,
-        columns: tuple["Column", ...],
-        table_name: str,
-    ) -> None:
-        for group_id, names in cls.grouped_unique_names(columns).items():
-            if len(names) < 2:
-                raise ValueError(
-                    f"unique_groups {group_id} on {table_name} must contain at least two columns"
-                )
 
     @classmethod
     def unique_group_constraints(cls, columns: tuple["Column", ...]) -> list[str]:

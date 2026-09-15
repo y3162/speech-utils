@@ -8,19 +8,6 @@ class Table:
     name: str
     columns: tuple[Column, ...]
 
-    def __post_init__(self) -> None:
-        self.validate()
-
-    def validate(self) -> None:
-        if not self.name:
-            raise ValueError("Table name must not be empty")
-        if not self.columns:
-            raise ValueError(f"Table {self.name} must have at least one column")
-        names = [column.name for column in self.columns]
-        if len(names) != len(set(names)):
-            raise ValueError(f"Table {self.name} has duplicate column names")
-        Column.validate_unique_groups(self.columns, self.name)
-
     @property
     def insertable_columns(self) -> tuple[Column, ...]:
         return tuple(column for column in self.columns if column.insertable)
